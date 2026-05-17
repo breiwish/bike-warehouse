@@ -1,0 +1,32 @@
+# venv + Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+*.egg-info/
+
+# Data — never commit
+data/
+*.duckdb
+*.duckdb.wal
+*.parquet
+
+# Secrets — only example files allowed
+secrets/*
+!secrets/*.example.json
+!secrets/.gitkeep
+.env
+.env.local
+
+# Generated dashboard output
+site/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.swp
