@@ -1,0 +1,121 @@
+name: Daily Strava Ingest
+
+on:
+  schedule:
+    - cron: "0 7 * * *"        # 07:00 UTC = midnight PDT / 11pm PST
+                               # Fires AFTER bike-report runs (04:00 UTC)
+                               # so reports are already emailed by then.
+  workflow_dispatch:
+    inputs:
+      window_days:
+        description: "How many days of recent activity to check"
+        required: false
+        default: "7"
+      full_backfill:
+        description: "Run full backfill instead of incremental"
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: write              # needed for release upload
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install deps
+        run: pip install -r requirements.txt --quiet
+
+      - name: Restore prior warehouse from latest release
+        run: |
+          mkdir -p data/activities data/streams
+          set +e
+          gh release download warehouse-latest --pattern 'warehouse.duckdb' --output data/warehouse.duckdb 2>/dev/null
+          gh release download warehouse-latest --pattern 'streams.tar.zst' --output data/streams.tar.zst 2>/dev/null
+          gh release download warehouse-latest --pattern 'activities.tar.zst' --output data/activities.tar.zst 2>/dev/null
+          set -e
+          if [ -f data/streams.tar.zst ]; then
+            tar --use-compress-program=unzstd -xf data/streams.tar.zst -C data/
+            rm data/streams.tar.zst
+          fi
+          if [ -f data/activities.tar.zst ]; then
+            tar --use-compress-program=unzstd -xf data/activities.tar.zst -C data/
+            rm data/activities.tar.zst
+          fi
+          python -c "import duckdb; con=duckdb.connect('data/warehouse.duckdb', read_only=True); print('rides in restored warehouse:', con.execute('SELECT count(*) FROM rides').fetchone()[0])" 2>/dev/null || echo "no prior warehouse, starting fresh"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Materialize secrets
+        env:
+          STRAVA_CLIENT_ID: ${{ secrets.STRAVA_CLIENT_ID }}
+          STRAVA_CLIENT_SECRET: ${{ secrets.STRAVA_CLIENT_SECRET }}
+          STRAVA_REFRESH_TOKEN: ${{ secrets.STRAVA_REFRESH_TOKEN }}
+        run: |
+          mkdir -p secrets
+          python -c "
+          import json, os
+          json.dump({
+              'client_id': os.environ['STRAVA_CLIENT_ID'],
+              'client_secret': os.environ['STRAVA_CLIENT_SECRET'],
+              'refresh_token': os.environ['STRAVA_REFRESH_TOKEN'],
+              'access_token': '',
+              'expires_at': 0,
+          }, open('secrets/strava.json', 'w'), indent=2)
+          "
+
+      - name: Run incremental ingest
+        if: github.event.inputs.full_backfill != 'true'
+        run: |
+          DAYS="${{ github.event.inputs.window_days || '7' }}"
+          python -m src.ingest_recent --days "$DAYS"
+
+      - name: Run full backfill
+        if: github.event.inputs.full_backfill == 'true'
+        run: python -m src.backfill
+
+      - name: Rebuild views + thresholds
+        run: |
+          python -m src.warehouse build
+          python -m src.thresholds
+
+      - name: Stats
+        run: python -m src.warehouse stats
+
+      - name: Package warehouse + raw data
+        run: |
+          tar --use-compress-program=zstd -cf data/streams.tar.zst -C data streams
+          tar --use-compress-program=zstd -cf data/activities.tar.zst -C data activities
+          ls -lh data/
+
+      - name: Publish to `warehouse-latest` release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if ! gh release view warehouse-latest >/dev/null 2>&1; then
+            gh release create warehouse-latest \
+              --title "Latest warehouse snapshot" \
+              --notes "Auto-published by ingest workflow. Replaced each run."
+          fi
+          gh release upload warehouse-latest \
+            data/warehouse.duckdb \
+            data/streams.tar.zst \
+            data/activities.tar.zst \
+            --clobber
+
+      - name: Notice
+        if: always()
+        run: |
+          echo "::notice::warehouse.duckdb published to release 'warehouse-latest'"
+          echo "::notice::Local sync: scripts/sync.sh"
