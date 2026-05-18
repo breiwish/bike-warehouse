@@ -12,21 +12,15 @@ echo "==> syncing from $REPO release '$TAG'"
 
 if [ -f data/warehouse.duckdb ]; then
   cp data/warehouse.duckdb data/warehouse.duckdb.bak
-  echo "    backed up existing warehouse → data/warehouse.duckdb.bak"
+  echo "    backed up existing → data/warehouse.duckdb.bak"
 fi
 
 mkdir -p data
-gh release download "$TAG" --repo "$REPO" \
-  --pattern 'warehouse.duckdb' \
-  --pattern 'streams.tar.zst' \
-  --pattern 'activities.tar.zst' \
-  --output data/{} \
-  --clobber 2>&1 | tail -5 || {
-    # gh download doesn't support --output {} on all versions; fall back per-file
-    for f in warehouse.duckdb streams.tar.zst activities.tar.zst; do
-      gh release download "$TAG" --repo "$REPO" --pattern "$f" --output "data/$f" --clobber
-    done
-  }
+for asset in warehouse.duckdb streams.tar.zst activities.tar.zst; do
+  echo "    fetching $asset"
+  gh release download "$TAG" --repo "$REPO" \
+    --pattern "$asset" --output "data/$asset" --clobber
+done
 
 if [ -f data/streams.tar.zst ]; then
   rm -rf data/streams
@@ -39,10 +33,14 @@ if [ -f data/activities.tar.zst ]; then
   rm data/activities.tar.zst
 fi
 
-python3 -c "
+# Use repo venv if present, else system python
+PY=python3
+if [ -x .venv/bin/python ]; then PY=.venv/bin/python; fi
+
+"$PY" -c "
 import duckdb
 con = duckdb.connect('data/warehouse.duckdb', read_only=True)
 n = con.execute('SELECT count(*) FROM rides').fetchone()[0]
 latest = con.execute('SELECT max(start_date_local) FROM rides').fetchone()[0]
-print(f'==> {n} rides, latest ride: {latest}')
+print(f'==> {n} rides, latest: {latest}')
 "
