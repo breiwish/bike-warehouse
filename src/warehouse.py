@@ -24,9 +24,10 @@ def init(con: duckdb.DuckDBPyConnection | None = None) -> None:
 
 
 def _build_stream_view(con: duckdb.DuckDBPyConnection) -> None:
-    glob = str(C.STREAMS / "*.parquet")
-    # Only build view if at least one parquet exists; else stub empty
-    existing = list(C.STREAMS.glob("*.parquet"))
+    # Exclude macOS AppleDouble (._*.parquet) that can leak via tar archives.
+    glob = str(C.STREAMS / "[!._]*.parquet")
+    existing = [p for p in C.STREAMS.glob("*.parquet")
+                if not p.name.startswith("._")]
     if existing:
         con.execute(f"""
             CREATE OR REPLACE VIEW streams AS
@@ -119,6 +120,39 @@ def latest_lthr(con: duckdb.DuckDBPyConnection | None = None) -> int:
     if own:
         con.close()
     return r[0] if r else C.DEFAULT_LTHR
+
+
+def resting_hr_on(ride_date, con: duckdb.DuckDBPyConnection | None = None) -> float:
+    """Best estimate of resting HR for a given date.
+
+    Resolution order:
+    1. Nearest wellness.resting_hr within ±7 days of ride_date.
+    2. Rolling 30-day avg of wellness.resting_hr centered on ride_date.
+    3. C.RESTING_HR constant.
+    """
+    own = con is None
+    con = con or connect(readonly=True)
+    try:
+        r = con.execute("""
+            SELECT resting_hr FROM wellness
+            WHERE resting_hr IS NOT NULL
+              AND date BETWEEN ? - INTERVAL 7 DAY AND ? + INTERVAL 7 DAY
+            ORDER BY abs(date - ?) ASC
+            LIMIT 1
+        """, [ride_date, ride_date, ride_date]).fetchone()
+        if r and r[0] is not None:
+            return float(r[0])
+        r = con.execute("""
+            SELECT avg(resting_hr) FROM wellness
+            WHERE resting_hr IS NOT NULL
+              AND date BETWEEN ? - INTERVAL 30 DAY AND ? + INTERVAL 30 DAY
+        """, [ride_date, ride_date]).fetchone()
+        if r and r[0] is not None:
+            return float(r[0])
+        return float(C.RESTING_HR)
+    finally:
+        if own:
+            con.close()
 
 
 if __name__ == "__main__":

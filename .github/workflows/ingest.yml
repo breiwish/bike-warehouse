@@ -95,8 +95,10 @@ jobs:
 
       - name: Package warehouse + raw data
         run: |
-          tar --use-compress-program=zstd -cf data/streams.tar.zst -C data streams
-          tar --use-compress-program=zstd -cf data/activities.tar.zst -C data activities
+          tar --exclude='._*' --use-compress-program=zstd \
+              -cf data/streams.tar.zst -C data streams
+          tar --exclude='._*' --use-compress-program=zstd \
+              -cf data/activities.tar.zst -C data activities
           ls -lh data/
 
       - name: Publish to `warehouse-latest` release
