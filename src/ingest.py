@@ -108,6 +108,7 @@ def _nan_to_none(v):
 def compute_row(activity: dict, streams_path: Path | None, lthr: int) -> dict:
     """Build the row to insert into rides table."""
     s = streams_path
+    gear = activity.get("gear") or {}
     row = {
         "activity_id": activity["id"],
         "name": activity.get("name"),
@@ -125,7 +126,12 @@ def compute_row(activity: dict, streams_path: Path | None, lthr: int) -> dict:
         "avg_hr": activity.get("average_heartrate"),
         "max_hr": activity.get("max_heartrate"),
         "avg_cad": activity.get("average_cadence"),
+        "calories": activity.get("calories"),
         "avg_temp_c": activity.get("average_temp"),
+        "gear_id": activity.get("gear_id"),
+        "gear_name": gear.get("name"),
+        "trainer": bool(activity.get("trainer")),
+        "commute": bool(activity.get("commute")),
         "has_streams": bool(s),
         "raw_path": str(_activity_path(activity["id"])),
     }

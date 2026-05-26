@@ -6,6 +6,7 @@ from pathlib import Path
 import duckdb
 
 from . import config as C
+from . import migrations
 
 
 def connect(readonly: bool = False) -> duckdb.DuckDBPyConnection:
@@ -18,6 +19,7 @@ def init(con: duckdb.DuckDBPyConnection | None = None) -> None:
     con = con or connect()
     schema = (Path(__file__).parent / "schema.sql").read_text()
     con.execute(schema)
+    migrations.apply_all(con)
     _build_stream_view(con)
     if own:
         con.close()

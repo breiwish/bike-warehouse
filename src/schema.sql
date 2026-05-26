@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS rides (
     avg_hr           DOUBLE,
     max_hr           DOUBLE,
     avg_cad          DOUBLE,
+    calories         DOUBLE,
     -- weather (when present)
     avg_temp_c       DOUBLE,
     -- computed
@@ -32,6 +33,11 @@ CREATE TABLE IF NOT EXISTS rides (
     z1_s INTEGER, z2_s INTEGER, z3_s INTEGER, z4_s INTEGER, z5_s INTEGER,
     -- gear dist as struct
     gear_pct         DOUBLE[],
+    -- Strava gear + ride attributes (sourced from raw activity JSON)
+    gear_id          VARCHAR,
+    gear_name        VARCHAR,
+    trainer          BOOLEAN,
+    commute          BOOLEAN,
     -- bookkeeping
     has_streams      BOOLEAN,
     ingested_at      TIMESTAMP DEFAULT now(),

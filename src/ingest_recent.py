@@ -6,12 +6,11 @@ Usage:
     python -m src.ingest_recent --all        # full backfill (same as backfill)
 """
 from __future__ import annotations
+
 import argparse
 import time
 
-from . import strava
-from . import warehouse
-from . import ingest
+from . import ingest, strava, warehouse
 
 
 def run(days: int = 7) -> dict:
