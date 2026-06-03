@@ -47,7 +47,7 @@ Your 43.7 mi long ride ran avg HR 157 = **Zone 3 tempo** — too hot for base mi
 
 | When | Test | Why |
 |---|---|---|
-| **Wk 1 (this week, rested)** | **Full Frontal** (~60 min) | Real baseline — full 4DP (NM/AC/MAP/FTP) + rider type + weakness. Do it fresh; Level mode for the sprints. |
+| ~~Wk 1~~ → **Tue 6/9 (wk 2, rested)** | **Full Frontal** (~60 min) | Real baseline — full 4DP (NM/AC/MAP/FTP) + rider type + weakness. Do it fresh; Level mode for the sprints. *(6/2 was a 20-min test = FTP 139 W only; moved the full test to 6/9 so legs are fresh after the test + Mon rest.)* |
 | **Wk 6 (~6 Jul)** | **Half Monty** (~45 min) | Mid-block check — FTP/MAP/LTHR, less taxing, no taper needed. Confirms MAP is rising. Also reused as a hard workout (below). |
 | **Wk 12 (~17 Aug)** | **Full Frontal** | Full retest before century/climb peak. Measures real gains, resets all zones. |
 
