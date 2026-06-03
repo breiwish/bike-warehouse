@@ -1,7 +1,7 @@
 # Road Training Plan — Summer 2026
 
 **Window:** 1 Jun → 30 Sep 2026 (17 weeks)
-**Rider:** LTHR 171 · resting HR 55 · FTP-est ~159 W (HR-modeled — Full Frontal sets the real number)
+**Rider:** LTHR 171 · resting HR 55 · **FTP 139 W** (measured on Kickr, 2026-06-02, supersedes the old 159 W HR-estimate) · MAP ~173 W (best 5-min) → MAP/FTP ≈ 1.24, so FTP has room to grow toward the ceiling. NM/AC not yet true-tested (do the full Full Frontal sprints for those + rider type).
 **Gear:** Wahoo Kickr Core 2 + Zwift + SYSTM. Power is **Kickr-only** (no outdoor PM → outdoor rides go by HR).
 
 ## Goals (all of them)
@@ -31,6 +31,15 @@ Your 43.7 mi long ride ran avg HR 157 = **Zone 3 tempo** — too hot for base mi
 | Z3 Tempo | 152–159 | sparingly — the "gray-zone" trap |
 | Z4 Threshold | 160–171 | Kickr intervals |
 | Z5 VO2+ | 172+ | Kickr MAP work |
+
+**Power zones (Kickr/Zwift, from FTP 139 W)** — set your Zwift FTP to 139; SYSTM auto-scales from its own Full Frontal:
+
+| Zone | Watts | | Zone | Watts |
+|---|---|---|---|---|
+| Z1 Recovery <55% | <76 | | Z5 VO2 106–120% | 147–167 |
+| Z2 Endurance 56–75% | 78–104 | | Z6 Anaerobic 121–150% | 168–209 |
+| Z3 Tempo 76–90% | 106–125 | | Z7 Neuro >150% | >209 |
+| Z4 Threshold 91–105% | 126–146 | | | |
 
 ---
 

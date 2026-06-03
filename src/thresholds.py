@@ -50,6 +50,35 @@ def detect_lthr(con: duckdb.DuckDBPyConnection) -> tuple[int, int]:
     return lthr, rh
 
 
+def detect_ftp_from_power(con: duckdb.DuckDBPyConnection) -> float | None:
+    """FTP from REAL power, when present (smart trainer / power meter).
+
+    FTP = 0.95 x best 20-min real-power window, taken as the max across all
+    rides that carry a `watts` stream. Returns None if no ride has real power,
+    so the caller falls back to the HR+physics estimate. A dedicated 20-min or
+    Full Frontal test naturally produces the maximal window and drives this.
+    """
+    row = con.execute("""
+        WITH clean AS (
+            SELECT activity_id, t_s, watts
+            FROM streams
+            WHERE moving AND watts IS NOT NULL
+              AND isfinite(watts) AND watts >= 0
+        ), win AS (
+            SELECT
+                avg(watts) OVER w   AS p20,
+                count(*)  OVER w    AS n
+            FROM clean
+            WINDOW w AS (PARTITION BY activity_id ORDER BY t_s
+                         ROWS BETWEEN 1199 PRECEDING AND CURRENT ROW)
+        )
+        SELECT max(p20) FROM win WHERE n >= 1200
+    """).fetchone()
+    if row and row[0] and row[0] == row[0]:
+        return float(row[0]) * 0.95
+    return None
+
+
 def detect_ftp_est(con: duckdb.DuckDBPyConnection, lthr: int) -> float:
     """FTP-estimate = avg est watts during best 20-min effort whose HR ≈ LTHR.
     Falls back to top-quantile sustained estimated power."""
@@ -85,12 +114,16 @@ def detect(refit_metrics: bool = True) -> dict:
     con = warehouse.connect()
     warehouse.init(con)
     lthr, rh = detect_lthr(con)
-    ftp = detect_ftp_est(con, lthr)
-    print(f"Detected: LTHR={lthr}, resting={rh}, FTP-est={ftp:.0f}W")
+    ftp_power = detect_ftp_from_power(con)
+    if ftp_power:
+        ftp, method = ftp_power, "best-20min-power*0.95"
+    else:
+        ftp, method = detect_ftp_est(con, lthr), "best-20min-hr+physics"
+    print(f"Detected: LTHR={lthr}, resting={rh}, FTP={ftp:.0f}W ({method})")
     con.execute("""
         INSERT INTO thresholds (as_of_date, lthr, resting_hr, ftp_est_w, method)
-        VALUES (current_date, ?, ?, ?, 'best-20min-hr+physics')
-    """, [lthr, rh, ftp])
+        VALUES (current_date, ?, ?, ?, ?)
+    """, [lthr, rh, ftp, method])
 
     if refit_metrics:
         # Recompute hrTSS for every ride with new LTHR
