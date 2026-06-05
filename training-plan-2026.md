@@ -7,7 +7,7 @@
 ## Goals (all of them)
 
 1. **1200 mi** ridden by 30 Sep (≈ 10 mi/day, ~69 mi/wk average).
-2. **Get faster / more watts** — raise FTP via MAP-first indoor work.
+2. **Raise FTP to 165 W (1.9 W/kg) by 30 Sep** — via MAP-first indoor work. Stretch **176 W = 2.0 W/kg** (weight loss is a second path: 168 W hits 2.0 at 84 kg); floor 155 W (+11%) if consistency slips. Baseline 139 W (6/2). Checkpoints: **6/9 Full Frontal** (true re-baseline) → **wk 6 Half Monty** (first bump) → **wk 12 Full Frontal** (the real measure; most gains land by here). FTP already sits at 80% of MAP, so the MAP/VO2 ceiling is the limiter — front-loaded MAP work targets exactly that. Track progress anytime via the `thresholds` table.
 3. **Lose weight** — volume + Zone-2 fat oxidation.
 4. **Complete a century** (100 mi) — Labor Day weekend.
 5. **Climb 3–4000 ft** — Mt. Diablo (~3,800 ft); Mt. Hamilton if going for 4,000+.
@@ -116,6 +116,18 @@ All names verified against the current SYSTM library (durations are SYSTM nomina
 > ⚠️ Verified-pool caveats: SYSTM's *recovery* catalog is one-deep (Recharger, 30m) and its sub-60-min pure-*endurance* catalog is thin — both confirmed by research, not invented. Plenty of MAP/threshold depth, which is what this plan leans on.
 
 ---
+
+## Strength training (2×/wk, work gym, 12 PM)
+
+Evidence-checked add-on (cycling is the lowest-interference endurance sport — this is additive to FTP). **Mon = Session A (heavy), Wed = Session B (lighter)** — keeps bike-quality days protected; Friday stays lift-free before the Sat long ride. Starts **wk of 6/15** (after the 6/9 Full Frontal).
+
+**Session A (Mon):** squat 3×8-10→4×4-6 · RDL 3×8-10→3×5 · hip thrust 3×10→3×6-8 · plank 3×30-45s · Pallof 3×8-10/side.
+**Session B (Wed):** Bulgarian split squat 3×8/side · KB swing/DB RDL 3×10 · ham curl 3×10 · side plank · back-extension holds. Keep moderate (protects Thu).
+**Warm-up (5 min):** half-kneeling hip-flexor stretch · glute bridge · cat-camel · world's greatest stretch · bird dog.
+
+**Progression/periodization:** wks 1–3 acclimation (light, RIR 3-4, technique) → heavy (80-90%) by mid-July → **drop to 1×/wk maintenance (Mon) from ~7/20** (keep load, cut volume). Diablo wk (8/10) light, no loaded legs 3-4 d before the 8/15 climb. **Drop lifting entirely 5-7 d before the 9/5 century** (8/31 Mon skipped). Real heavy block belongs in the off-season (post-9/30).
+
+**Cautions:** judge interference by *power, not soreness*; a bike fit is likely the biggest low-back lever; prioritize protein while cutting to protect lean mass; don't fear small leg-mass gain (usually power-positive).
 
 ## Backyard stretch goals
 
