@@ -4,9 +4,21 @@
 **Rider:** LTHR 171 · resting HR 55 · **FTP 139 W** (measured on Kickr, 2026-06-02, supersedes the old 159 W HR-estimate) · MAP ~173 W (best 5-min) → MAP/FTP ≈ 1.24, so FTP has room to grow toward the ceiling. NM/AC not yet true-tested (do the full Full Frontal sprints for those + rider type).
 **Gear:** Wahoo Kickr Core 2 + Zwift + SYSTM. Power is **Kickr-only** (no outdoor PM → outdoor rides go by HR).
 
-## Goals (all of them)
+> **⚠️ REFRAMED 2026-07-18 — third down week, momentum crisis.** Knee tweak
+> ~6/30 turned into three broken weeks (wk5, wk6, wk7-ish). Chasing a big mileage
+> number at low CTL was killing motivation, so the goal changed shape entirely:
+> **mileage is no longer primary.** New anchors — (1) **consistency: 3 rides/week,
+> every week**; (2) **event: Tour de Menlo 65 mi, Sep 26** (supported). The
+> self-supported century (8/31) is **dropped** — too much knee risk on this base.
+> Mt. Diablo demoted to optional. Bike fit **Tue 7/22** is the reset line. Prior
+> retargets: 1200→1000 on 7/7. See **Knee-recovery protocol** below.
 
-1. **1200 mi** ridden by 30 Sep (≈ 10 mi/day, ~69 mi/wk average).
+## Goals (reframed 7/18)
+
+1. **Consistency — ride 3×/week, every week.** The primary goal now. Miles and fitness follow; small weekly wins beat a big deficit.
+2. **Tour de Menlo 65 mi (Sep 26)** — the hero event. Build the long ride 14→65 over the block.
+3. **~900 mi** by 30 Sep — a *secondary, beatable* marker (was 1200→1000→800; bumped to 900 on 7/18 when motivation returned and the user chose the harder "Solid" ramp, peak ~72 mi/wk).
+4. **Mt. Diablo (~3,800 ft)** — back as a real option in wk 11 (was dropped, now a stretch the volume supports).
 2. **Raise FTP to 165 W (1.9 W/kg) by 30 Sep** — via MAP-first indoor work. Stretch **176 W = 2.0 W/kg** (weight loss is a second path: 168 W hits 2.0 at 84 kg); floor 155 W (+11%) if consistency slips. Baseline 139 W (6/2). Checkpoints: **6/9 Full Frontal** (true re-baseline) → **wk 6 Half Monty** (first bump) → **wk 12 Full Frontal** (the real measure; most gains land by here). FTP already sits at 80% of MAP, so the MAP/VO2 ceiling is the limiter — front-loaded MAP work targets exactly that. Track progress anytime via the `thresholds` table.
 3. **Lose weight** — volume + Zone-2 fat oxidation.
 4. **Complete a century** (100 mi) — Labor Day weekend.
@@ -77,22 +89,32 @@ Your 43.7 mi long ride ran avg HR 157 = **Zone 3 tempo** — too hot for base mi
 | 2 | Jun 8–14 | 60 | 30 | base |
 | 3 | Jun 15–21 | 66 | 35 | base |
 | 4 | Jun 22–28 | 48 | 22 | 🔵 recovery |
-| 5 | Jun 29–Jul 5 | 70 | 40 | MAP build |
-| 6 | Jul 6–12 | 68 | 35 | **Half Monty** |
-| 7 | Jul 13–19 | 78 | 45 | MAP build |
-| 8 | Jul 20–26 | 55 | 30 | 🔵 recovery |
-| 9 | Jul 27–Aug 2 | 80 | 50 | FTP build |
-| 10 | Aug 3–9 | 86 | 58 | FTP build |
-| 11 | Aug 10–16 | 78 | **Mt. Diablo ~45 mi / 3,800 ft** | 🏔️ climb goal |
-| 12 | Aug 17–23 | 58 | 35 | 🔵 recovery + **Full Frontal** |
-| 13 | Aug 24–30 | 84 | 75 | peak · century prep |
-| 14 | Aug 31–Sep 6 | 92 | **CENTURY 100 mi** (Labor Day wknd) | 🎯 century goal |
-| 15 | Sep 7–13 | 60 | 30 | 🔵 recovery |
-| 16 | Sep 14–20 | 80 | 60 | sharpen |
-| 17 | Sep 21–27 | 75 | **Tour de Menlo 65 mi (Sep 26)** | 🎉 event finish |
-| + | Sep 28–30 | ~20 | — | mop-up to clinch 1200 |
+| 5 | Jun 29–Jul 5 | ~~70~~ 11 actual | 40 | MAP build — **lost to knee injury** |
+| 6 | Jul 6–12 | ~~68~~ **25** (11 act) | 12 | 🩹 re-entry (knee) — second break taken |
+| 7 | Jul 13–19 | **40** | 24 | 🩹 comeback ramp — back on 7/13, spin easy |
+| 8 | Jul 20–26 | **45** | 28 | 🔧 rebuild + **bike fit Tue 7/22** — restart 3×/wk streak |
+| 9 | Jul 27–Aug 2 | **55** | 35 | base rebuild |
+| 10 | Aug 3–9 | **62** | 42 | long-ride build |
+| 11 | Aug 10–16 | **68** | 48 | long-ride build · **Mt. Diablo option (~3,800 ft)** |
+| 12 | Aug 17–23 | **50** | 32 | 🔵 recovery + **Full Frontal** |
+| 13 | Aug 24–30 | **68** | 52 | long-ride build |
+| 14 | Aug 31–Sep 6 | **72** | 58 | peak week *(no century — Tour de Menlo is the event)* |
+| 15 | Sep 7–13 | **55** | 45 | taper start |
+| 16 | Sep 14–20 | **60** | 40 | sharpen |
+| 17 | Sep 21–27 | **65** | **Tour de Menlo 65 mi (Sep 26)** | 🎯🎉 goal event |
+| + | Sep 28–30 | ~10 | — | mop-up |
 
-**Total ≈ 1,213 mi.** Recovery weeks (🔵) are non-negotiable — that's where adaptation banks and injury risk drops. Front-loaded buffer: a missed week won't sink 9/30. Ramp is aggressive (46 → 92 mi/wk peak); if anything *hurts* (not just tired), cut a weekday and keep the weekend.
+**Retargeted total ≈ 900 mi (secondary marker).** The spine is still **3 rides/week** + the **long-ride progression to 65 mi**, but the "Solid" ramp (chosen 7/18 when motivation returned) pushes weekly volume to a **~72 mi peak** — a real step up. Mt. Diablo is back as a genuine wk-11 option. **Century stays dropped.** Guardrails unchanged: recovery weeks (🔵) non-negotiable, and it's the *jump* between weeks that re-injures, not the number — so no skipping steps in the ramp. If anything *hurts* (not just tired), cut a weekday and keep the weekend.
+
+### 🩹 Knee-recovery protocol (added 2026-07-07, still active)
+
+Injured ~6/30; two 1-week breaks (wk5 + wk6). Back riding 7/13, pain-free. First comeback ride (7/13, "Ramp It Up Lite") was textbook: cadence 85 rpm, decoupling −17.5% (stronger late). Coming-back rules, biggest levers first:
+
+1. **Spin, don't grind.** High cadence (90+ rpm), low resistance. High-torque mashing is the #1 knee stressor → **ease off MAP/threshold intensity for ~1–2 weeks** (those are grind-heavy). Rebuild Z2 base before resuming hard Kickr intervals.
+2. **Bike fit.** Saddle too low = classic front-of-knee (patellar) pain; too high = back-of-knee. Worth a fit check *before* ramping volume.
+3. **Full warm-up** before any hard effort — never cold knees into intervals.
+4. **Strength mods.** Keep knee-friendly **hip-hinge** work (RDL, hip thrust); **back off deep loaded knee flexion** (squats, Bulgarian split squats) until the knee is quiet. Re-add gradually.
+5. **Pain rule:** dull ache = manage (cadence/fit/load); **sharp pain = stop the ride.** Don't push through sharp knee pain.
 
 ---
 

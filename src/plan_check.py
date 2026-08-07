@@ -1,4 +1,18 @@
-"""Plan-vs-actual tracker for the 2026 summer block (1200 mi, 6/1 -> 9/30).
+"""Plan-vs-actual tracker for the 2026 summer block (6/1 -> 9/30).
+
+Goal history:
+  - Started 1200 mi.
+  - 2026-07-07: cut to 1000 after a knee injury cost wk5-6.
+  - 2026-07-18: reframed after a THIRD down week. Mileage stopped being the
+    primary goal — it demotivated at low CTL. Anchors: (1) consistency, ride
+    3x/week; (2) event = Tour de Menlo 65 mi (Sep 26). Century dropped.
+  - 2026-07-18 (same day, later): user re-motivated, wanted to go harder. Picked
+    the "Solid" ramp — weekly volume climbs to a ~72 mi peak, landing ~900 mi.
+    Mt. Diablo back as a real option (wk11). Guardrails stay (cadence, recovery
+    weeks, sharp-pain-stops); it's the *jump* that re-injures, not the number.
+    Century stays dropped. GOAL_MILES = 900 (still secondary to consistency+TdM).
+Weeks 1-5 keep their original targets (historical); wk6 onward is the knee-safe,
+long-ride-to-65 ramp.
 
 Single source of truth for the weekly targets lives in PLAN below. Run any time
 to see where you stand against plan + whether to adjust:
@@ -18,7 +32,7 @@ from datetime import date, datetime, timedelta
 from . import warehouse
 
 KM_PER_MI = 1.609344
-GOAL_MILES = 1200
+GOAL_MILES = 900  # secondary/beatable marker; real goal = consistency + Tour de Menlo 65mi
 GOAL_START = date(2026, 6, 1)
 GOAL_END = date(2026, 9, 30)
 
@@ -29,19 +43,19 @@ PLAN = [
     (3,  date(2026, 6, 15), date(2026, 6, 21), 66, 35, "Base",             ""),
     (4,  date(2026, 6, 22), date(2026, 6, 28), 48, 22, "Recovery",         ""),
     (5,  date(2026, 6, 29), date(2026, 7, 5),  70, 40, "MAP build",        ""),
-    (6,  date(2026, 7, 6),  date(2026, 7, 12), 68, 35, "MAP build",        "Half Monty"),
-    (7,  date(2026, 7, 13), date(2026, 7, 19), 78, 45, "MAP build",        ""),
-    (8,  date(2026, 7, 20), date(2026, 7, 26), 55, 30, "Recovery",         ""),
-    (9,  date(2026, 7, 27), date(2026, 8, 2),  80, 50, "FTP build",        ""),
-    (10, date(2026, 8, 3),  date(2026, 8, 9),  86, 58, "FTP build",        ""),
-    (11, date(2026, 8, 10), date(2026, 8, 16), 78, 45, "Climb: Mt Diablo", ""),
-    (12, date(2026, 8, 17), date(2026, 8, 23), 58, 35, "Recovery",         "Full Frontal"),
-    (13, date(2026, 8, 24), date(2026, 8, 30), 84, 75, "Peak",             ""),
-    (14, date(2026, 8, 31), date(2026, 9, 6),  92, 100, "CENTURY",         ""),
-    (15, date(2026, 9, 7),  date(2026, 9, 13), 60, 30, "Recovery",         ""),
-    (16, date(2026, 9, 14), date(2026, 9, 20), 80, 60, "Sharpen",          ""),
-    (17, date(2026, 9, 21), date(2026, 9, 27), 75, 65, "Tour de Menlo",    ""),
-    # 9/28-9/30 mop-up to clinch 1200 sits outside the weekly grid (~20 mi)
+    (6,  date(2026, 7, 6),  date(2026, 7, 12), 25, 12, "Re-entry (knee)",  ""),
+    (7,  date(2026, 7, 13), date(2026, 7, 19), 40, 24, "Comeback ramp",    ""),
+    (8,  date(2026, 7, 20), date(2026, 7, 26), 45, 28, "Rebuild + bike fit", ""),
+    (9,  date(2026, 7, 27), date(2026, 8, 2),  55, 35, "Base rebuild",     ""),
+    (10, date(2026, 8, 3),  date(2026, 8, 9),  62, 42, "Long-ride build",  ""),
+    (11, date(2026, 8, 10), date(2026, 8, 16), 68, 48, "Diablo option",    ""),
+    (12, date(2026, 8, 17), date(2026, 8, 23), 50, 32, "Recovery",         "Full Frontal"),
+    (13, date(2026, 8, 24), date(2026, 8, 30), 68, 52, "Long-ride build",  ""),
+    (14, date(2026, 8, 31), date(2026, 9, 6),  72, 58, "Peak long ride",   ""),
+    (15, date(2026, 9, 7),  date(2026, 9, 13), 55, 45, "Taper start",      ""),
+    (16, date(2026, 9, 14), date(2026, 9, 20), 60, 40, "Sharpen",          ""),
+    (17, date(2026, 9, 21), date(2026, 9, 27), 65, 65, "Tour de Menlo",    ""),
+    # 9/28-9/30 mop-up (~10 mi); mileage secondary (~900 target) — see docstring
 ]
 PLAN_TOTAL = sum(w[3] for w in PLAN)
 
